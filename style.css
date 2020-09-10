@@ -1,0 +1,60 @@
+/* Global */
+:root {
+    /* Color */
+    --color-black: #333333;
+    --color-white: #ffffff;
+    --color-gray: #c6c6c6;
+    --color-amber: #ffca28;
+    --color-red: #d32f2f;
+
+    /* Font Size */
+    --font-large: 96px;
+    --font-medium: 30px;
+    --font-regular: 18px;
+    --font-small: 16px;
+    --font-micro: 14px;
+
+    /* Font Weight */
+    --weight-bold: 700;
+    --weight-semi-bold: 600;
+    --weight-regular: 400;
+
+}
+
+/* Universal Tags */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--color-black);
+    font-family: 'Open Sans', sans-serif;
+    color: var(--color-white);
+    margin: 0;
+}
+
+ul, li {
+    list-style: none;
+}
+
+/* Typography */
+h1 {
+    font-size: var(--font-large);
+    margin: 16px 0;
+}
+
+h2 {
+    font-size: var(--font-medium);
+    font-weight: var(--weight-semi-bold);
+    margin: 8px 0;
+}
+
+h3 {
+    font-size: var(--font-regular);
+    font-weight: var(--weight-regular);
+}
+
+span {
+    font-size: var(--font-small);
+    font-weight: var(--weight-regular);
+}
