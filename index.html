@@ -15,18 +15,23 @@
             <div class="clock">
                 <h1 class="clock__title">00:00:00</h1>
             </div>
-            <div class="name">
+            <div class="greeting">
                 <h2>Hello, What's your name?</h2>
+                <!-- <h2>
+                    Good <span class="period">afternoon</span>,
+                    <span class="name">ming</span>
+                </h2> -->
                 <input type="text" class="name__input">
             </div>
-            <div class="weather">
+            <!-- <div class="weather">
                 <i class="far fa-sun"></i>
                 <div class="weather__info">
                     <p>시흥시</p>
                     <p>20º</p>
                 </div>
-            </div>
+            </div> -->
         </div>
+        
         <div class="task-container">
             <div class="task">
                 <h1 class="task__title">TASK LIST</h1>
@@ -36,26 +41,32 @@
                 <div class="to-do-list">
                     <h3>To Do List</h3>
                     <ul>
-                        <li>
-                            <input type="checkbox" name="" id="">
-                            <span>물 마시기</span>
-                            <span>
+                        <li class="list__item">
+                            <p class="item__detail">
+                                <input type="checkbox" name="" id="">
+                                <span>물 마시기</span>
+                            </p>
+                            <p class="item__delete">
                                 <i class="fas fa-minus-circle"></i>
-                            </span>
+                            </p>
                         </li>
                     </ul>
                 </div>
                 <div class="done-list">
                     <h3>Done</h3>
                     <ul>
-                        <li>
-                            <span>물 마시기</span>
-                            <span>
-                                <i class="fas fa-undo-alt"></i>
-                            </span>
-                            <span>
-                                <i class="fas fa-minus-circle"></i>
-                            </span>
+                        <li class="list__item">
+                            <p class="item__detail">
+                                <span>물 마시기</span>
+                            </p>
+                            <p class="item__event">
+                                <span class="item__undo">
+                                    <i class="fas fa-undo-alt"></i>
+                                </span>
+                                <span class="item__delete">
+                                    <i class="fas fa-minus-circle"></i>
+                                </span>
+                            </p>
                         </li>
                     </ul>
                 </div>
