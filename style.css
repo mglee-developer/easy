@@ -9,7 +9,7 @@
 
     /* Font Size */
     --font-large: 96px;
-    --font-medium: 30px;
+    --font-medium: 48px;
     --font-regular: 18px;
     --font-small: 16px;
     --font-micro: 14px;
@@ -82,7 +82,7 @@ span {
     text-align: center;
 }
 
-.section.enter {
+.section.section__transform {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -93,7 +93,7 @@ span {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, 90%); 
+    transform: translate(-50%, 60%); 
 }
 
 .clock-container.active {
@@ -102,6 +102,15 @@ span {
     left: 0;
     flex-basis: 50%;
     transform: translate(0%, 50%);
+}
+
+.js-greeting,
+.greeting {
+    display: none;
+}
+
+.showing {
+    display: block;
 }
 
 .name__input {
@@ -135,6 +144,7 @@ span {
 .task__input {
     width: 300px;
     color: var(--color-black);
+    font-size: var(--font-regular);
 }
 
 .list {

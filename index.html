@@ -13,17 +13,14 @@
 <body>
     <section class="section">
         <div class="clock-container">
-            <div class="clock">
+            <div class="js-clock">
                 <h1 class="clock__title">00:00:00</h1>
             </div>
-            <form class="greeting">
+            <div class="js-greeting">
                 <h2>Hello, What's your name?</h2>
-                <!-- <h2>
-                    Good <span class="period">afternoon</span>,
-                    <span class="name">ming</span>
-                </h2> -->
                 <input type="text" class="name__input">
-            </form>
+            </div>
+            <h2 class="greeting"></h2>
             <!-- <div class="weather">
                 <i class="far fa-sun"></i>
                 <div class="weather__info">
@@ -41,7 +38,7 @@
             <div class="list">
                 <div class="to-do-list">
                     <h3>To Do List</h3>
-                    <ul>
+                    <ul class="to-do">
                         <li class="list__item">
                             <p class="item__detail">
                                 <input type="checkbox" name="" id="">
@@ -55,7 +52,7 @@
                 </div>
                 <div class="done-list">
                     <h3>Done</h3>
-                    <ul>
+                    <ul class="done">
                         <li class="list__item">
                             <p class="item__detail">
                                 <span>물 마시기</span>

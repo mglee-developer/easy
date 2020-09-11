@@ -1,5 +1,5 @@
 const clock = document.querySelector('.clock');
-const clockTitle = clock.querySelector('.clock__title');
+const clockTitle = document.querySelector('.clock__title');
 
 function getTime() {
     const date = new Date();
@@ -7,10 +7,11 @@ function getTime() {
     const minutes = date.getMinutes();
     const seconds = date.getSeconds();
     
-    clockTitle.innerHTML = `
-    ${hours < 10 ? `0${hours}` : hours}:${
+    clockTitle.innerHTML = `${hours < 10 ? `0${hours}` : hours}:${
         minutes < 10 ? `0${minutes}` : minutes
     }:${seconds < 10 ? `0${seconds}` : seconds}`;
+
+    return hours;
 }
 
 function init() {
