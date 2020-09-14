@@ -6,6 +6,7 @@
     --color-gray: #c6c6c6;
     --color-amber: #ffca28;
     --color-red: #d32f2f;
+    --color-green: #64dd17;
 
     /* Font Size */
     --font-large: 96px;
@@ -83,6 +84,10 @@ p {
 span {
     font-size: var(--font-small);
     font-weight: var(--weight-regular);
+}
+
+i {
+    font-size: var(--font-small);
 }
 
 /* Section */
@@ -169,8 +174,18 @@ span {
     justify-content: space-between;
 }
 
+.item__checkbox {
+    transition: all var(--animation-duration) ease-out;
+}
+
+.item__checkbox:hover {
+    color: var(--color-green); 
+    transform: scale(1.1);
+}
+
 .item__delete {
-    transition: all var(--animation-duration) ease-in;
+    transition: all var(--animation-duration) ease-out;
+
 }
 
 .item__delete:hover {

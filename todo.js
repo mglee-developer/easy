@@ -17,7 +17,9 @@ function wrtieToDo(currentToDo) {
     li.setAttribute('data-id', id);
     li.innerHTML = `
         <p class="item__detail">
-            <input type="checkbox" name="" id="">
+            <button class="item__checkbox">
+                <i class="far fa-check-circle"></i>
+            </button>
             <span>${currentToDo}</span>
         </p>
         <button class="item__delete">
