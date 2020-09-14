@@ -175,12 +175,16 @@ i {
 }
 
 .item__checkbox {
-    transition: all var(--animation-duration) ease-out;
+    display: none;
 }
 
-.item__checkbox:hover {
-    color: var(--color-green); 
-    transform: scale(1.1);
+.item__checkbox + .item__customCheck::before {
+    display: inline-block;
+    content: '⬜';
+}
+
+.item__checkbox:checked + .item__customCheck::before {
+    content: '✔';
 }
 
 .item__delete {

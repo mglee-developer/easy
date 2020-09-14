@@ -1,10 +1,32 @@
 const toDoInput = document.querySelector('.task__input');
 const toDo = document.querySelector('.to-do');
-const deleteBtn = document.querySelector('.item__delete');
 
 const CURTODOS_LS = 'toDos';
 
-const toDos = [];
+let toDos = [];
+
+function moveTodo() {
+    console.log('click');
+}
+
+function deleteTodo(e) {
+    const id = e.target.dataset.id;
+
+    if(id == null) {
+        return;
+    }
+
+    const toBeDelete = document.querySelector(`.list__item[data-id="${id}"]`);
+    console.log(toBeDelete);
+    toBeDelete.remove();
+    const cleanTodo = toDos.filter(toDo => {
+        return toDo.id !== parseInt(toBeDelete.dataset.id);
+    });
+    console.log(cleanTodo);
+    toDos = cleanTodo;
+
+    saveToDo();
+}
 
 function saveToDo() {
     localStorage.setItem(CURTODOS_LS, JSON.stringify(toDos));
@@ -17,9 +39,8 @@ function wrtieToDo(currentToDo) {
     li.setAttribute('data-id', id);
     li.innerHTML = `
         <p class="item__detail">
-            <button class="item__checkbox">
-                <i class="far fa-check-circle"></i>
-            </button>
+            <input type="checkbox" class="item__checkbox" id="${id}" />
+            <label for="${id}" class="item__customCheck"></label>
             <span>${currentToDo}</span>
         </p>
         <button class="item__delete">
@@ -37,6 +58,13 @@ function wrtieToDo(currentToDo) {
     toDos.push(toDoList);
 
     saveToDo();
+
+    // item delete
+    toDo.addEventListener('click', deleteTodo);
+
+    // item check
+    const checkBtn = document.querySelector('.item__checkbox');
+    checkBtn.addEventListener('click', moveTodo);
 }
 
 function createTodo() {
@@ -54,21 +82,6 @@ function loadToDo() {
         parseTodos.forEach(parseTodo => {
             // toDoList 작성
             wrtieToDo(parseTodo.text);
-        });
-
-        // item delete
-        toDo.addEventListener('click', (e) => {
-            const id = e.target.dataset.id;
-
-            if(id == null) {
-                return;
-            }
-
-            const toBeDelete = document.querySelector(`.list__item[data-id="${id}"]`);
-            toBeDelete.remove();
-            toDos.pop();
-
-            saveToDo();
         });
     }
 }
