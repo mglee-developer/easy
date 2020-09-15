@@ -8,10 +8,11 @@ const DONE_LS = 'finished';
 let toDos = [];
 let dones = [];
 
+// 아이템 이동(done or todo)
 function moveItem(e) {
     const id = e.target.id;
     const checkedList = e.target.parentNode.parentNode.parentNode;
-    console.log(checkedList.className);
+
     if(id == null) {
         return;
     }
@@ -57,22 +58,37 @@ function moveItem(e) {
     }
 }
 
-function deleteTodo(e) {
+// 아이템 삭제
+function deleteItem(e) {
     const id = e.target.dataset.id;
+    const checkedList = e.target.parentNode.parentNode.parentNode;
+
     if(id == null) {
         return;
     }
 
-    const toBeDelete = document.querySelector(`.list__item[data-id="${id}"]`);
-    toBeDelete.remove();
-    const cleanTodo = toDos.filter(toDo => {
-        return toDo.id !== parseInt(toBeDelete.dataset.id);
-    });
-    toDos = cleanTodo;
+    if(checkedList.className === 'to-do') {
+        const toBeDelete = document.querySelector(`.list__item[data-id="${id}"]`);
+        toBeDelete.remove();
+        const cleanTodo = toDos.filter(toDo => {
+            return toDo.id !== parseInt(toBeDelete.dataset.id);
+        });
+        toDos = cleanTodo;
+    
+        saveToDo();
+    }else {
+        const toBeDoneDel = document.querySelector(`.list__item[data-id="${id}"]`);
+        toBeDoneDel.remove();
+        const cleanDone = dones.filter((list) => {
+            return list.id !== parseInt(toBeDoneDel.dataset.id);
+        });
+        dones = cleanDone;
 
-    saveToDo();
+        saveDone();
+    }
 }
 
+// 스토리지에 저장
 function saveDone() {
     localStorage.setItem(DONE_LS, JSON.stringify(dones));
 }
@@ -81,6 +97,7 @@ function saveToDo() {
     localStorage.setItem(CURTODOS_LS, JSON.stringify(toDos));
 }
 
+// 해야할 일 작성
 function wrtieToDo(text) {
     const toDoList = document.createElement('li');
     const id = toDos.length * 2;
@@ -115,7 +132,7 @@ function wrtieToDo(text) {
     toDo.appendChild(toDoList);
 
     // delte item
-    deleteBtn.addEventListener('click', deleteTodo);
+    deleteBtn.addEventListener('click', deleteItem);
     // move item
     checkBtn.addEventListener('click', moveItem);
 
@@ -129,6 +146,7 @@ function wrtieToDo(text) {
     saveToDo();
 }
 
+// 해야할 일 새로 입력
 function createTodo() {
     const currentValue = toDoInput.value;
     wrtieToDo(currentValue);

@@ -34,6 +34,8 @@ function writeDone(text) {
 
     // back item
     backBtn.addEventListener('click', moveItem);
+    // delete item
+    deleteBtn.addEventListener('click', deleteItem);
 
     doneObj = {
         id: id,
