@@ -1,75 +1,136 @@
 const toDoInput = document.querySelector('.task__input');
 const toDo = document.querySelector('.to-do');
+const done = document.querySelector('.done');
 
 const CURTODOS_LS = 'toDos';
+const DONE_LS = 'finished';
 
 let toDos = [];
+let dones = [];
 
-function moveTodo() {
-    console.log('click');
+function moveItem(e) {
+    const id = e.target.id;
+    const checkedList = e.target.parentNode.parentNode.parentNode;
+    console.log(checkedList.className);
+    if(id == null) {
+        return;
+    }
+
+    if(checkedList.className === 'to-do') {
+        const toBeMove = document.querySelector(`.list__item[data-id="${id}"]`);
+        toBeMove.remove();
+        done.appendChild(toBeMove);
+
+        // done list로 이동
+        const finished = toDos.filter((list) => {
+            return list.id === parseInt(toBeMove.dataset.id);
+        });
+        // console.log(finished);
+        dones.push(...finished);
+        saveDone();
+
+        // to do list에서 제거
+        const stayed = toDos.filter((list) => {
+            return list.id !== parseInt(toBeMove.dataset.id);
+        });
+        toDos = stayed;
+        saveToDo();
+    }else {
+        const toBeBack = document.querySelector(`.list__item[data-id="${id}"]`);
+        console.log(toBeBack);
+        toBeBack.remove();
+        toDo.appendChild(toBeBack);
+    
+        // to do list add
+        const notFinished = dones.filter((list) => {
+            return list.id === parseInt(toBeBack.dataset.id);
+        });
+        toDos.push(...notFinished);
+        saveToDo();
+    
+        // done list remove
+        const stayed = dones.filter((list) => {
+            return list.id !== parseInt(toBeBack.dataset.id);
+        });
+        dones = stayed;
+        saveDone();
+    }
 }
 
 function deleteTodo(e) {
     const id = e.target.dataset.id;
-
     if(id == null) {
         return;
     }
 
     const toBeDelete = document.querySelector(`.list__item[data-id="${id}"]`);
-    console.log(toBeDelete);
     toBeDelete.remove();
     const cleanTodo = toDos.filter(toDo => {
         return toDo.id !== parseInt(toBeDelete.dataset.id);
     });
-    console.log(cleanTodo);
     toDos = cleanTodo;
 
     saveToDo();
+}
+
+function saveDone() {
+    localStorage.setItem(DONE_LS, JSON.stringify(dones));
 }
 
 function saveToDo() {
     localStorage.setItem(CURTODOS_LS, JSON.stringify(toDos));
 }
 
-function wrtieToDo(currentToDo) {
-    const li = document.createElement('li');
-    const id = toDos.length + 1;
-    li.setAttribute('class', 'list__item');
-    li.setAttribute('data-id', id);
-    li.innerHTML = `
-        <p class="item__detail">
-            <input type="checkbox" class="item__checkbox" id="${id}" />
-            <label for="${id}" class="item__customCheck"></label>
-            <span>${currentToDo}</span>
-        </p>
-        <button class="item__delete">
-            <i class="fas fa-minus-circle" data-id=${id}></i>
-        </button>
-    `;
+function wrtieToDo(text) {
+    const toDoList = document.createElement('li');
+    const id = toDos.length * 2;
+    toDoList.setAttribute('class', 'list__item');
+    toDoList.setAttribute('data-id', id);
 
-    toDo.appendChild(li);
+    const toDoItem = document.createElement('div');
+    toDoItem.setAttribute('class', 'item__div');
 
-    toDoList = {
+    const checkBtn =document.createElement('input');
+    checkBtn.setAttribute('type', 'checkbox');
+    checkBtn.setAttribute('class', 'item__checkbox');
+    checkBtn.setAttribute('id', id);
+
+    const listLabel = document.createElement('label');
+    listLabel.setAttribute('class', 'item__customCheck');
+    listLabel.setAttribute('for', id);
+
+    const listSpan = document.createElement('span');
+    listSpan.innerText = `${text}`;
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.setAttribute('class', 'item__delete');
+    deleteBtn.innerHTML = `<i class="fas fa-minus-circle" data-id=${id}></i>`;
+
+    toDoList.appendChild(toDoItem);
+    toDoItem.appendChild(checkBtn);
+    toDoItem.appendChild(listLabel);
+    toDoItem.appendChild(listSpan);
+    toDoList.appendChild(deleteBtn);
+
+    toDo.appendChild(toDoList);
+
+    // delte item
+    deleteBtn.addEventListener('click', deleteTodo);
+    // move item
+    checkBtn.addEventListener('click', moveItem);
+
+    toDoObj = {
         id: id,
-        text: currentToDo
+        text: text
     }
 
-    toDos.push(toDoList);
+    toDos.push(toDoObj);
 
     saveToDo();
-
-    // item delete
-    toDo.addEventListener('click', deleteTodo);
-
-    // item check
-    const checkBtn = document.querySelector('.item__checkbox');
-    checkBtn.addEventListener('click', moveTodo);
 }
 
 function createTodo() {
     const currentValue = toDoInput.value;
-
     wrtieToDo(currentValue);
     toDoInput.value = '';
     toDoInput.focus();
@@ -77,9 +138,10 @@ function createTodo() {
 
 function loadToDo() {
     const currentToDo = localStorage.getItem(CURTODOS_LS);
+
     if(currentToDo !== null) {
         const parseTodos = JSON.parse(currentToDo);
-        parseTodos.forEach(parseTodo => {
+        parseTodos.forEach((parseTodo) => {
             // toDoList 작성
             wrtieToDo(parseTodo.text);
         });
