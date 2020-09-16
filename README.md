@@ -9,4 +9,4 @@
 - Weather
 
 ## Try it out
-[first](https://mglee-developer.github.io/easy/.)
+<https://mglee-developer.github.io/easy/>
