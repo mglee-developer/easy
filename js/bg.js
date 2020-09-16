@@ -4,7 +4,7 @@ const IMAGE_CNT = 8;
 
 function paintImage(imageNum) {
     const image = new Image();
-    image.src = `images/${imageNum + 1}.jpg`;
+    image.src = `images/bg/${imageNum + 1}.jpg`;
     image.classList.add('body__bg');
     body.prepend(image);
 }
