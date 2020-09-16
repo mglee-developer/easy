@@ -26,7 +26,6 @@ function moveItem(e) {
         const finished = toDos.filter((list) => {
             return list.id === parseInt(toBeMove.dataset.id);
         });
-        // console.log(finished);
         dones.push(...finished);
         saveDone();
 
@@ -38,7 +37,6 @@ function moveItem(e) {
         saveToDo();
     }else {
         const toBeBack = document.querySelector(`.list__item[data-id="${id}"]`);
-        console.log(toBeBack);
         toBeBack.remove();
         toDo.appendChild(toBeBack);
     

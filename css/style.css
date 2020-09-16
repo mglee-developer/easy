@@ -226,11 +226,12 @@ i {
 }
 
 .item__delete {
-    color: var(--color-red);
+    color: var(--color-white);
     transition: all var(--animation-duration) ease-out;
 
 }
 
 .item__delete:hover {
+    color: var(--color-red);
     transform: scale(1.1);
 }
