@@ -1,0 +1,60 @@
+
+/* Task */
+.task-container {
+    display: none;
+}
+
+.task-container.active {
+    display: block;
+    flex-basis: 50%;
+    transform: translate(0%, 50%);
+}
+
+.task__input {
+    width: 300px;
+    color: var(--color-black);
+    font-size: var(--font-regular);
+}
+
+.list {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 16px;
+}
+
+.to-do, .done-list {
+    height: 300px;
+    overflow-y: auto;
+}
+
+.list__item {
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 8px 0;
+}
+
+.item__checkbox {
+    display: none;
+}
+
+.item__checkbox + .item__customCheck::before {
+    display: inline-block;
+    content: '⬜';
+}
+
+.item__checkbox:checked + .item__customCheck::before {
+    content: '✔';
+}
+
+.item__delete {
+    color: var(--color-red);
+    transition: all var(--animation-duration) ease-out;
+
+}
+
+.item__delete:hover {
+    transform: scale(1.1);
+}
+
