@@ -17,7 +17,7 @@ function getWeater(lat, lon) {
             const place = json.name;
             const temp = Math.floor(json.main.temp - 273);
             weather.innerHTML = `
-                <img src="http://openweathermap.org/img/wn/${icon}@2x.png" />
+                <img src="http://openweathermap.org/img/wn/${icon}@2x.png" class="weather__image" />
                 <div class="weather__info">
                     <p class="city">${place}</p>
                     <p class="temperature">${temp}º</p>
